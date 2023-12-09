@@ -20,22 +20,18 @@ class Sensor
 
   def calculate_difference
     new_steps = calculate @difference[0]
-    until new_steps.all? { |e| e == 0 }
+    until new_steps.all?(0)
       @difference << new_steps
       new_steps = calculate new_steps
     end
   end
 
-  def calculate(steps)
-    calculated = []
-    steps.each_cons(2) { |a, b| calculated << b - a }
-    calculated
-  end
+  def calculate(steps) = steps.each_cons(2).map { |a, b| b - a }
 
 end
 
 input = File.read("#{File.dirname(__FILE__)}/day_9.input").split("\n")
-sensors = input.map { |line| Sensor.new(line) }
+sensors = input.map { Sensor.new(_1) }
 p sensors.map(&:prediction).sum # 1834108701
 p sensors.map(&:backwards_prediction).sum # 993
 
